@@ -35,20 +35,36 @@ ostream &operator<<(ostream &os, const Lijst<T> &l);
 template <class T>
 class Lijst : private Lijstknoopptr<T> {
   public:
-    using std::unique_ptr<Lijstknoop<T>>::operator=;
-    using std::unique_ptr<Lijstknoop<T>>::swap;
+    using Lijstknoopptr<T>::operator=;
+    using Lijstknoopptr<T>::swap;
 
     // ToDo:
     // - Add default constructor
     Lijst<T>() {}
     // - Add copy constructor
-    Lijst<T>(const Lijst<T> &l) {
-        
-    }
+    Lijst<T>(const Lijst<T> &l) { std::cout << "copy constructor\n"; }
     // - Add move constructor
+    Lijst<T>(Lijst<T> &&l) { std::cout << "move constructor\n"; }
     // - Add copy assignment
+    void recursie(Lijstknoop<T> *k) {
+        if (!k) {
+            return;
+        }
+        recursie(k->volgend.get());
+        voegToe(k->sleutel);
+    }
+
+    Lijst<T> &operator=(const Lijst<T> &l) {
+        std::cout << "copy operator\n";
+        Lijstknoop<T> *ptr = l.get();
+        this->reset();
+        recursie(ptr);
+        return *this;
+    }
+
     // - Add move assignment
-    Lijst<T> &operator=(Lijst<T> &&l) {
+    Lijst<T> &operator=(Lijst<T> &&l) noexcept {
+        std::cout << "move operator\n";
         if (&l != this) {
             this->swap(l);
             l.reset();
@@ -56,6 +72,7 @@ class Lijst : private Lijstknoopptr<T> {
         return *this;
     }
     // - Add destructor
+    ~Lijst<T>() {}
 
     // operaties
 
@@ -306,8 +323,8 @@ void Lijst<T>::insertionsort() {
     while (ongesorteerd) {
         Lijst *plaats = zoekGesorteerd(ongesorteerd.get()->sleutel);
         Lijstknoopptr<T> dummy = std::move(ongesorteerd);
-        // vermits ongesorteerd een nullpointer is, is het equivalent van volgende lijnen ongeveer
-        // ongesorteerd=std::move(dummy.get()->volgend);
+        // vermits ongesorteerd een nullpointer is, is het equivalent van volgende lijnen
+        // ongeveer ongesorteerd=std::move(dummy.get()->volgend);
         // std::swap(*plaats,dummy.get()->volgend);
         std::swap(ongesorteerd, dummy.get()->volgend);
         dummy.get()->volgend = std::move(*plaats);

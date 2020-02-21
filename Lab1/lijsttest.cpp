@@ -44,32 +44,28 @@ int main() {
         verwijderd++;
         l.verwijder(123);
         Lijstknoop<int>::controle(gemaakt, verwijderd);
-        /*
-        for (auto s : l) {
-            std::cerr << s << "\n";
-        }
+
         l.schrijf(std::cerr);
         std::cerr << "\n";
 
+        std::cerr << "Losse oproep maak\n";
+        maak();
+        verwijderd += 8;
+        Lijstknoop<int>::controle(gemaakt, verwijderd);
 
+        std::cerr << "maak() in constructor\n";
+        Lijst<int> l2(maak());
+        Lijstknoop<int>::controle(gemaakt, verwijderd);
 
-          std::cerr << "Losse oproep maak\n";
-          maak();
-          verwijderd += 8;
-          Lijstknoop<int>::controle(gemaakt, verwijderd);
+        std::cerr << "duplicaat 1\n";
+        l2 = l;
+        if (!l2.isClone(l))
+            throw("copy levert andere lijst op.");
+        verwijderd += 8;
+        gemaakt += 7;
 
-          std::cerr << "maak() in constructor\n";
-          Lijst<int> l2(maak());
-          Lijstknoop<int>::controle(gemaakt, verwijderd);
-
-          std::cerr << "duplicaat 1\n";
-          l2 = l;
-          if (!l2.isClone(l))
-              throw("copy levert andere lijst op.");
-          verwijderd += 8;
-          gemaakt += 7;
-          Lijstknoop<int>::controle(gemaakt, verwijderd);
-
+        /*
+        Lijstknoop<int>::controle(gemaakt, verwijderd);
           std::cerr << "duplicaat 2\n";
           l2 = l;
           gemaakt += 7;
@@ -118,6 +114,9 @@ int main() {
           l = l2;
           verwijderd += 5;
           Lijstknoop<int>::controle(gemaakt, verwijderd);
+          for (auto s : l) {
+            std::cerr << s << "\n";
+          }
       }
 
       verwijderd += 7;
