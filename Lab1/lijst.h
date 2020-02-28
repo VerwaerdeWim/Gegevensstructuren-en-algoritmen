@@ -8,7 +8,7 @@
 //
 //
 // speciale code voor iteratoren
-//#define ITERATOR
+#define ITERATOR
 
 #include <algorithm>
 #include <cassert>
@@ -44,7 +44,11 @@ class Lijst : private Lijstknoopptr<T> {
     // - Add copy constructor
     Lijst<T>(const Lijst<T> &l) { std::cout << "copy constructor\n"; }
     // - Add move constructor
-    Lijst<T>(Lijst<T> &&l) { std::cout << "move constructor\n"; }
+    Lijst<T>(Lijst<T> &&l) {
+        std::cout << "move constructor\n";
+        this->swap(l);
+        l.reset();
+    }
     // - Add copy assignment
     void recursie(Lijstknoop<T> *k) {
         if (!k) {
@@ -56,9 +60,11 @@ class Lijst : private Lijstknoopptr<T> {
 
     Lijst<T> &operator=(const Lijst<T> &l) {
         std::cout << "copy operator\n";
-        Lijstknoop<T> *ptr = l.get();
-        this->reset();
-        recursie(ptr);
+        if (&l != this) {
+            Lijstknoop<T> *ptr = l.get();
+            this->reset();
+            recursie(ptr);
+        }
         return *this;
     }
 
@@ -132,14 +138,31 @@ class Lijst : private Lijstknoopptr<T> {
     // iterator; gaat ervan uit dat alles const is
   public:
     class iterator {
+      private:
+        Lijstknoop<T> *itr;
+
       public:
-        iterator(Lijstknoop<T> *l = 0);
-        const T &operator*() const;
-        const iterator &operator++();
-        bool operator!=(const iterator &i);
+        iterator(Lijstknoop<T> *l = 0) : itr(l) {}
+
+        const T &operator*() const {
+            return itr->sleutel;
+        }
+
+        const iterator &operator++() {
+            itr = itr->volgend.get();
+            return *this;
+        }
+
+        bool operator!=(const iterator &i) {
+            return itr!=i.itr;
+        }
     };
-    iterator begin() const;
-    iterator end() const;
+    iterator begin() const{
+        return iterator(this->get());
+    }
+    iterator end() const{
+        return nullptr;
+    }
 };
 
 template <class T>

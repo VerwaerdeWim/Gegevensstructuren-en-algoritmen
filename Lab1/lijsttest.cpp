@@ -64,66 +64,63 @@ int main() {
         verwijderd += 8;
         gemaakt += 7;
 
-        /*
         Lijstknoop<int>::controle(gemaakt, verwijderd);
-          std::cerr << "duplicaat 2\n";
-          l2 = l;
-          gemaakt += 7;
-          verwijderd += 7;
-          Lijstknoop<int>::controle(gemaakt, verwijderd);
+        std::cerr << "duplicaat 2\n";
+        l2 = l;
+        gemaakt += 7;
+        verwijderd += 7;
+        Lijstknoop<int>::controle(gemaakt, verwijderd);
 
-          std::cerr << "duplicaat 3\n";
-          l2 = l2;
-          Lijstknoop<int>::controle(gemaakt, verwijderd);
-          l2.schrijf(std::cerr);
-          std::cerr << "\n";
+        std::cerr << "duplicaat 3\n";
+        l2 = l2;
+        Lijstknoop<int>::controle(gemaakt, verwijderd);
+        l2.schrijf(std::cerr);
+        std::cerr << "\n";
 
-          std::cerr << "duplicaat 4\n";
-          Lijst<int> l3;
-          l3.voegToe(int(99));
-          gemaakt++;
-          Lijstknoop<int>::controle(gemaakt, verwijderd);
-          l3 = l2 = l;
-          verwijderd += 8;
-          gemaakt += 14;
-          Lijstknoop<int>::controle(gemaakt, verwijderd);
+        std::cerr << "duplicaat 4\n";
+        Lijst<int> l3;
+        l3.voegToe(int(99));
+        gemaakt++;
+        Lijstknoop<int>::controle(gemaakt, verwijderd);
+        l3 = l2 = l;
+        verwijderd += 8;
+        gemaakt += 14;
+        Lijstknoop<int>::controle(gemaakt, verwijderd);
 
-          std::cerr << "insertion sort\n";
-          l2.insertionsort();
-          Lijstknoop<int>::controle(gemaakt, verwijderd);
+        std::cerr << "insertion sort\n";
+        l2.insertionsort();
+        Lijstknoop<int>::controle(gemaakt, verwijderd);
 
-          std::cerr << "verwijderen\n";
-          l.verwijder(45);
-          l.verwijder(45);
-          l.verwijder(45);
-          l.verwijder(45);
-          verwijderd += 2;
-          Lijstknoop<int>::controle(gemaakt, verwijderd);
+        std::cerr << "verwijderen\n";
+        l.verwijder(45);
+        l.verwijder(45);
+        l.verwijder(45);
+        l.verwijder(45);
+        verwijderd += 2;
+        Lijstknoop<int>::controle(gemaakt, verwijderd);
 
-          std::cerr << "swappen\n";
-          swap(l2, l);
-          Lijstknoop<int>::controle(gemaakt, verwijderd);
-          l2.schrijf(std::cerr);
+        std::cerr << "swappen\n";
+        swap(l2, l);
+        Lijstknoop<int>::controle(gemaakt, verwijderd);
+        l2.schrijf(std::cerr);
 
-          std::cerr << "\nl=move(l2)\n";
-          l = move(l2);
-          verwijderd += 7;
-          Lijstknoop<int>::controle(gemaakt, verwijderd);
+        std::cerr << "\nl=move(l2)\n";
+        l = move(l2);
+        verwijderd += 7;
+        Lijstknoop<int>::controle(gemaakt, verwijderd);
 
-          std::cerr << "l=l2\n";
-          l = l2;
-          verwijderd += 5;
-          Lijstknoop<int>::controle(gemaakt, verwijderd);
-          for (auto s : l) {
+        std::cerr << "l=l2\n";
+        l = l2;
+        verwijderd += 5;
+        Lijstknoop<int>::controle(gemaakt, verwijderd);
+        for (auto s : l) {
             std::cerr << s << "\n";
-          }
-      }
-
-      verwijderd += 7;
-      Lijstknoop<int>::controle(gemaakt, verwijderd);
-
-      std::cout << "OK\n";
-  */
+        }
     }
+
+    verwijderd += 7;
+    Lijstknoop<int>::controle(gemaakt, verwijderd);
+
+    std::cout << "OK\n";
     return 0;
 }
