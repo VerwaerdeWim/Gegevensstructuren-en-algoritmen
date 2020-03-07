@@ -5,6 +5,8 @@
 #include "mergesort.h"
 #include "shellsort.h"
 #include "stlsort.h"
+#include "heapsort.h"
+#include "selectionsort.h"
 
 #include <array>
 #include <cassert>
@@ -20,10 +22,12 @@ void measure_sorts(const std::string& csv_filename)
 
     CsvData csv_results{csv_filename, '.', ','};
 
-    std::array<std::pair<std::string, std::unique_ptr<Sorteermethode<T>>>, 3> sorters = {
+    std::array<std::pair<std::string, std::unique_ptr<Sorteermethode<T>>>, 5> sorters = {
             std::make_pair("STL sort", std::make_unique<STLSort<T>>()),
             std::make_pair("Insertion sort", std::make_unique<InsertionSort<T>>()),
-            std::make_pair("Shell sort", std::make_unique<ShellSort<T>>())
+            std::make_pair("Selection sort", std::make_unique<SelectionSort<T>>()),
+            std::make_pair("Shell sort", std::make_unique<ShellSort<T>>()),
+            std::make_pair("Heap sort", std::make_unique<HeapSort<T>>()),
             // std::make_pair("Merge sort", std::make_unique<MergeSort<T>>())
             };
 
