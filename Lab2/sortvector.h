@@ -87,6 +87,11 @@ void Sortvector<T>::vul_random() {
     std::generate(this->begin(), this->end(), [&dist, &rd]() { return dist(rd); });
 }
 
+template<class T>
+bool Sortvector<T>::is_gesorteerd() const {
+    return is_sorted(this->begin(), this->end());
+}
+
 template <class T>
 void Sortvector<T>::schrijf(ostream &os) const {
     for (auto &&t : *this) {

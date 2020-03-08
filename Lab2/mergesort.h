@@ -33,16 +33,7 @@ void merge(std::vector<T> &v, int l, int m, int r) {
         i++;
     }
 
-    // testen of rechterdeel volledig doorlopen is
-    int hulp_end;
-    if (j > r) {
-        hulp_end = hulp.size();
-    }
-    else {
-        hulp_end = j - l;
-    }
-
-    for (int i = 0; i < hulp_end; i++) {
+    for (int i = 0; i < k; i++) {
         v[l + i] = std::move(hulp[i]);
     }
 }
